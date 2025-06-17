@@ -43,6 +43,13 @@ def print_slot_machine(columns):
         print()  # New line after each row
     print()  # Extra new line for better readability
 
+def GetWinnings(columns, bet, lines):
+    winnings = 0
+    for i in range(lines):
+        if columns[i][0] == columns[i][1] == columns[i][2]:  # Check if all symbols in the line are the same
+            winnings += bet * symbols[columns[i][0]]  # Multiply bet by the symbol's value
+    return winnings
+
 def GetAndValidateInput(prompt, min_value, max_value):
     while True:
         value = input(prompt)
@@ -55,9 +62,3 @@ def GetAndValidateInput(prompt, min_value, max_value):
         else:
             print("Invalid input. Please enter a valid number.")
     
-def GetWinnings(columns, bet, lines):
-    winnings = 0
-    for i in range(lines):
-        if columns[i][0] == columns[i][1] == columns[i][2]:  # Check if all symbols in the line are the same
-            winnings += bet * symbols[columns[i][0]]  # Multiply bet by the symbol's value
-    return winnings

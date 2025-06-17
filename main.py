@@ -39,9 +39,32 @@ def main():
 
     print(f"Your remaining balance is ${balance}.")
 
-    columns = spin_slot_machine(ROWS, COLS, symbols)
-    print(columns)
-    print("Here are the results of your spin:")
-    print_slot_machine(columns)
+    first_spin = True
+    while True:
+        if balance >= 0:
+            play_again = input("Do you want to play? (yes/no): ").strip().lower()
+            if play_again in ['yes', 'y'] :
+                columns = spin_slot_machine(ROWS, COLS, symbols)
+               
+                if not first_spin :
+                    balance -= total_bet
+                
+                print(columns)
+                print("Here are the results of your spin:")
+                print_slot_machine(columns)
+                winnings = GetWinnings(columns, bet, lines)
+                print(f"You won ${winnings}!")
+                balance += winnings
+                print(f"Your new balance is ${balance}.")            
+                first_spin = False
+            elif play_again in ['no', 'n']:
+                print("Thank you for playing! Goodbye!")
+                return
+            else:
+                print("Invalid input. Please enter 'yes' or 'no'.")
+       
+        else:
+            print("You have run out of balance. Thank you for playing!")        
+            return
 main()
 
